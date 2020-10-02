@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { FileSelectToString } from './components/FileSelectToString/FileSelectToString';
+import { FileSelectToString, SumDisplay } from './components';
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
         onError={(e) => console.error(e)}
       />
       <button>Sum Values</button>
-      {/* <SumDisplay/> */}
+      <SumDisplay/>
     </div>
   );
 }
