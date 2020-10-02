@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 
 type FileSelectToStringProps = {
   fileType: string;
-  onLoad: (csvString: string | ArrayBuffer) => void;
+  onLoad: (csvString: string) => void;
   onError: (error: Event) => void;
 };
 
@@ -25,7 +25,7 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, onLo
     reader.onload = () => {
       if(!reader.result) return;
       setMessage('File Loaded!');
-      onLoad(reader.result);
+      onLoad(reader.result.toString());
     };
     reader.onerror = (e) => {
       setMessage('Error Loading File..');
