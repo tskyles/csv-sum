@@ -14,7 +14,7 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, onLo
     if(!fileList) return;
     const file = fileList[0]
     // get the file info
-
+    if(!file) return;
     if (file.type !== fileType) {
       setMessage('Wrong File Type..');
       return;
