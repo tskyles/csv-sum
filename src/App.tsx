@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import { FileSelector } from './components/FileSelector/FileSelector';
+import { FileSelectToString } from './components/FileSelectToString/FileSelectToString';
 
 function App() {
 
   
   return (
     <div className='app-container'>
-      <FileSelector 
+      <FileSelectToString 
         fileType='text/csv' 
         onLoad={(string) => console.log(string)} 
         onError={(e) => console.error(e)}
