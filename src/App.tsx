@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { FileSelectToString, SumDisplay } from './components';
 
 function App() {
-
+  const [csvString, setCsvString] = useState<string>('');
   
   return (
     <div className='app-container'>
       <FileSelectToString 
         fileType='text/csv' 
-        onLoad={(string) => console.log(string)} 
+        onLoad={(string) => setCsvString(string)} 
         onError={(e) => console.error(e)}
       />
-      <button>Sum Values</button>
-      <SumDisplay/>
+      <SumDisplay 
+        showButton={!!csvString}
+        csvString={csvString}
+      />
     </div>
   );
 }
