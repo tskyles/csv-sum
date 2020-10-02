@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 type FileSelectToStringProps = {
   fileType: string;
@@ -7,6 +7,7 @@ type FileSelectToStringProps = {
 };
 
 export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, onLoad, onError}) => {
+  const [message, setMessage] = useState('');
 
   // get csv file and read it
   function selectFile(fileList: FileList | null) {
@@ -15,7 +16,7 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, onLo
     // get the file info
 
     if (file.type !== fileType) {
-      console.error('Wrong File Type');
+      setMessage('Wrong File Type..');
       return;
     }
 
@@ -23,9 +24,13 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, onLo
 
     reader.onload = () => {
       if(!reader.result) return;
+      setMessage('File Loaded!');
       onLoad(reader.result);
     };
-    reader.onerror = (e) => onError(e);
+    reader.onerror = (e) => {
+      setMessage('Error Loading File..');
+      onError(e)
+    };
 
     reader.readAsText(file);
   }
@@ -34,6 +39,7 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, onLo
     <div className="file-select-container">
       <label>Upload .csv file:</label>
       <input type='file' onChange={e => selectFile(e.target.files)}></input>
+      <p>{message}</p>
     </div>
   )
 }
