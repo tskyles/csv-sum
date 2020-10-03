@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, MutableRefObject, useRef, useState } from 'react';
 import './style.css';
 
 type FileSelectToStringProps = {
@@ -9,7 +9,9 @@ type FileSelectToStringProps = {
 };
 
 export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, fileAccepted, onLoad, onError}) => {
-  const [message, setMessage] = useState('');
+  const hiddenFileInput = useRef() as MutableRefObject<HTMLInputElement>;
+  const [message, setMessage] = useState<string>('');
+  const [fileName, setFileName] = useState<string>('');
 
   // get csv file and read it
   function selectFile(fileList: FileList | null):void {
@@ -18,6 +20,8 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, file
     const reader = new FileReader();
     const file = fileList[0]
     console.log(file);
+
+    if(file) setFileName(file.name);
     // get the file info
     // if (file.type !== fileType) {
     //   setMessage('Wrong File Type..');
@@ -40,12 +44,26 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, file
     reader.readAsText(file);
   }
 
+  function handleClick() {
+    hiddenFileInput.current.click();
+  }
+
   return (
     <div className="file-select-container">
       <label>Choose a .csv file to upload:</label>
-      <input 
-        type='file' 
-        onChange={e => selectFile(e.target.files)} accept={fileType} 
+      <div>
+        <input
+          type='text'
+          readOnly={true}
+          value={fileName}
+        />
+        <button onClick={handleClick}>Browse</button>
+      </div>
+      <input
+        className='hidden'
+        type='file'
+        ref={hiddenFileInput}
+        onChange={e => selectFile(e.target.files)} accept={fileType}
       />
       <p>{message}</p>
     </div>
