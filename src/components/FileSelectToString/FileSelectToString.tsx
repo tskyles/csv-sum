@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import './style.css';
 
 type FileSelectToStringProps = {
   fileType: string;
@@ -16,13 +17,13 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, file
 
     const reader = new FileReader();
     const file = fileList[0]
+    console.log(file);
     // get the file info
-    if(!file) return;
-    if (file.type !== fileType) {
-      setMessage('Wrong File Type..');
-      fileAccepted(false);
-      return;
-    }
+    // if (file.type !== fileType) {
+    //   setMessage('Wrong File Type..');
+    //   fileAccepted(false);
+    //   return;
+    // }
 
     reader.onload = () => {
       if(!reader.result) return;
@@ -41,8 +42,11 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, file
 
   return (
     <div className="file-select-container">
-      <label>Upload .csv file:</label>
-      <input type='file' onChange={e => selectFile(e.target.files)}></input>
+      <label>Choose a .csv file to upload:</label>
+      <input 
+        type='file' 
+        onChange={e => selectFile(e.target.files)} accept={fileType} 
+      />
       <p>{message}</p>
     </div>
   )

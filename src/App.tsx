@@ -16,7 +16,7 @@ function App() {
   return (
     <div className='app-container'>
       <FileSelectToString 
-        fileType='text/csv' 
+        fileType='.csv' 
         fileAccepted={(isAccepted) => acceptFile(isAccepted)}
         onLoad={(string) => setCsvString(string)} 
         onError={(e) => console.error(e)}
