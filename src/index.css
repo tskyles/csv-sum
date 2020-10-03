@@ -8,11 +8,27 @@ body {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
+button {
+	background-color: rgb(63, 118, 189);
+	border-color: rgb(63, 118, 189);
+	color: #ffffff;
+	font-weight: bold;
+	height: 25px;
+}
+
+input {
+	background-color: white;
+	color: #000000;
+}
+
+label {
+	margin: 10px 0;
+	font-size: 0.75rem;
+}
+
+.hidden {
+	display: none;
 }
