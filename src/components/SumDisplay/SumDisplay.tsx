@@ -36,11 +36,6 @@ export const SumDisplay: FC<SumDisplayProps> = ({showButton, csvString}) => {
     setValueSum(sum);
   }
 
-  function numberWithCommas(x: number | null):string {
-    if(!x) return '';
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
   if(showButton){
     return (
       <div className='sum-display-container'>
