@@ -19,6 +19,10 @@ button {
 	height: 25px;
 }
 
+button:focus {
+	outline: none;
+}
+
 input {
 	background-color: white;
 	color: #000000;
