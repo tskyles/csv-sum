@@ -8,7 +8,7 @@ type SumDisplayProps = {
 export const SumDisplay: FC<SumDisplayProps> = ({showButton, csvString}) => {
   const [valueSum, setValueSum] = useState<number>()
 
-  function sumCsvValues(csvString: string) {
+  function sumCsvValues(csvString: string):void {
     if(!csvString) return;
 
     // break string into an array where each index is a row of the csv
