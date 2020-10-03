@@ -1,0 +1,14 @@
+.file-select-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+#file-input {
+	display: flex;
+	justify-content: space-between;
+}
+
+#file-message {
+	align-self: flex-end;
+}
