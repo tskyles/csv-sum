@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 type SumDisplayProps = {
   showButton: boolean;
@@ -6,12 +6,17 @@ type SumDisplayProps = {
 }
 
 export const SumDisplay: FC<SumDisplayProps> = ({showButton, csvString}) => {
-  const [valueSum, setValueSum] = useState<number>()
+  const [valueSum, setValueSum] = useState<number | null>(null)
+
+  // reset valueSum to null when the csvString changes
+  useEffect(() => {
+    setValueSum(null);
+  }, [csvString])
 
   function sumCsvValues(csvString: string):void {
     if(!csvString) return;
 
-    // break string into an array where each index is a row of the csv
+    // break string into an array where each index is a row of the csv as a string
     const stringArray: string[] = csvString.split(/\r\n|\n/);
     let sum: number = 0;
 
