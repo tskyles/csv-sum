@@ -2,6 +2,8 @@
 
 This is a React application that takes in a .csv file of numerical data and returns a sum of all the values.
 
+View the app [here](https://skyles-csv-sum.netlify.app)
+
 ## Available Scripts
 
 In the project directory, you can run:
