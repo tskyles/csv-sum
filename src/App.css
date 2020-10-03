@@ -1,4 +1,15 @@
 .app-container {
-	background-color: blanchedalmond;
-	height: 100px;
+	background-color: lightgray;
+	box-shadow: 5px 5px 10px rgb(139, 139, 139);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	margin-top: 35%;
+}
+
+.app-container > div {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 30px;
 }
