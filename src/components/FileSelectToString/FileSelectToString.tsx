@@ -1,14 +1,13 @@
 import React, { FC, MutableRefObject, useRef, useState } from 'react';
-import './style.css';
+import './FileSelectToString.css';
 
 type FileSelectToStringProps = {
   fileType: string;
-  fileAccepted: (isAccepted: boolean) => void;
   onLoad: (csvString: string) => void;
   onError: (error: Event) => void;
 };
 
-export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, fileAccepted, onLoad, onError}) => {
+export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, onLoad, onError}) => {
   const hiddenFileInput = useRef() as MutableRefObject<HTMLInputElement>;
   const [message, setMessage] = useState<string>('');
   const [fileName, setFileName] = useState<string>('');
@@ -32,12 +31,12 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, file
     reader.onload = () => {
       if(!reader.result) return;
       setMessage('File Loaded!');
-      fileAccepted(true);
+      // fileAccepted(true);
       onLoad(reader.result.toString());
     };
     reader.onerror = (e) => {
       setMessage('Error Loading File..');
-      fileAccepted(false);
+      // fileAccepted(false);
       onError(e)
     };
 
@@ -51,21 +50,22 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, file
   return (
     <div className="file-select-container">
       <label>Choose a .csv file to upload:</label>
-      <div>
+      <div id='file-input'>
         <input
+          className='file-text'
           type='text'
-          readOnly={true}
+          disabled={true}
           value={fileName}
         />
         <button onClick={handleClick}>Browse</button>
       </div>
+      <label id='file-message'>{message}</label>
       <input
         className='hidden'
         type='file'
         ref={hiddenFileInput}
         onChange={e => selectFile(e.target.files)} accept={fileType}
       />
-      <p>{message}</p>
     </div>
   )
 }

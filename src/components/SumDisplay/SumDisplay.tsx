@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import './SumDisplay.css';
 
 type SumDisplayProps = {
   showButton: boolean;
@@ -35,11 +36,16 @@ export const SumDisplay: FC<SumDisplayProps> = ({showButton, csvString}) => {
     setValueSum(sum);
   }
 
+  function numberWithCommas(x: number | null):string {
+    if(!x) return '';
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   if(showButton){
     return (
-      <div>
+      <div className='sum-display-container'>
+        <p>Sum: {valueSum}</p>
         <button onClick={() => sumCsvValues(csvString)}>Sum Values</button>
-        <p>{valueSum}</p>
       </div>
     )
   }
