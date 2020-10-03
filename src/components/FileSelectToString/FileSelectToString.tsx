@@ -18,25 +18,19 @@ export const FileSelectToString: FC<FileSelectToStringProps> = ({ fileType, onLo
 
     const reader = new FileReader();
     const file = fileList[0]
-    console.log(file);
 
     if(file) setFileName(file.name);
-    // get the file info
-    // if (file.type !== fileType) {
-    //   setMessage('Wrong File Type..');
-    //   fileAccepted(false);
-    //   return;
-    // }
 
+    reader.onloadstart = () => {
+      setMessage('Loading...')
+    }
     reader.onload = () => {
-      if(!reader.result) return;
+      if (!reader.result) return;
       setMessage('File Loaded!');
-      // fileAccepted(true);
       onLoad(reader.result.toString());
     };
     reader.onerror = (e) => {
       setMessage('Error Loading File..');
-      // fileAccepted(false);
       onError(e)
     };
 
